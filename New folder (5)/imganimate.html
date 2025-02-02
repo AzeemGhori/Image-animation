@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery with Dynamic Background</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            filter: blur(20px);
+            background-color: black;
+            z-index: -1;
+            transition: background 0.5s ease, filter 0.5s ease;
+        }
+        .gallery {
+            text-align: center;
+            z-index: 1;
+        }
+        .main-image img {
+            width: 80%;
+            max-width: 700px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+        .main-image img:hover {
+            transform: scale(1.05);
+        }
+        .thumbnails {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .thumbnails img {
+            width: 100px;
+            height: 80px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .thumbnails img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div class="background" id="background"></div>
+
+    <div class="gallery">
+        <div class="main-image">
+            <img id="mainImage" src="main.jpg" alt="Main Image">
+        </div>
+        <div class="thumbnails">
+            <img src="main.jpg" onclick="changeImage(this.src)" alt="Thumbnail 1">
+            <img src="photo1.jpg" onclick="changeImage(this.src)" alt="Thumbnail 1">
+            <img src="photo2.jpg" onclick="changeImage(this.src)" alt="Thumbnail 2">
+            <img src="photo3.jpg" onclick="changeImage(this.src)" alt="Thumbnail 3">
+            <img src="photo4.jpg" onclick="changeImage(this.src)" alt="Thumbnail 4">
+        </div>
+    </div>
+
+    <script>
+        const background = document.getElementById('background');
+        const mainImage = document.getElementById('mainImage');
+
+        function changeImage(src) {
+            mainImage.src = src;
+            background.style.backgroundImage = `url(${src})`;
+        }
+    </script>
+</body>
+</html>
